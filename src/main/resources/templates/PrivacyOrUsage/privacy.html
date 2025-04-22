@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隐私政策</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/privacy.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+</head>
+<body>
+<header class="header" >
+    <nav class="nav-container" >
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main class="privacy-wrapper">
+    <section class="privacy-header">
+        <h1><i class="fas fa-shield-alt"></i> 隐私政策 Privacy Policy</h1>
+        <p class="subtitle">我们非常重视您的隐私，以下政策将帮助您了解我们如何收集、使用和保护您的信息。</p>
+    </section>
+
+    <section class="privacy-content">
+        <h2>1. 信息收集</h2>
+        <p>当您注册账号、浏览网站或发布内容时，我们可能会收集您的用户名、邮箱、浏览行为等信息。</p>
+
+        <h2>2. 信息使用</h2>
+        <p>我们将您的信息用于：</p>
+        <ul>
+            <li>改进网站内容和功能</li>
+            <li>个性化内容推荐</li>
+            <li>与您进行沟通和提供服务支持</li>
+        </ul>
+
+        <h2>3. Cookie 的使用</h2>
+        <p>我们使用 Cookie 技术提升您的使用体验，例如保持登录状态、记录浏览历史等。您可以自行在浏览器中清除或禁用 Cookie。</p>
+
+        <h2>4. 信息共享</h2>
+        <p>我们不会出售、出租或以其他方式与第三方共享您的个人信息，除非征得您的同意，或依法应当提供。</p>
+
+        <h2>5. 信息安全</h2>
+        <p>我们采用多种安全技术保护您的信息免受未经授权的访问、披露、使用或更改。但互联网并非绝对安全，请您妥善保管个人信息。</p>
+
+        <h2>6. 未成年人信息</h2>
+        <p>若您是未成年人，请在监护人同意下使用本站服务。我们不会主动收集未成年人个人信息。</p>
+
+        <h2>7. 政策变更</h2>
+        <p>隐私政策可能会更新，请定期查看最新版本。重大变更我们将通过邮件或页面公告通知。</p>
+
+        <h2>8. 联系我们</h2>
+        <p>如您对隐私政策有任何疑问、建议或投诉，请发送邮件至：<a href="mailto:qiqizizzz@qq.com">qiqizizzz@qq.com</a>。</p>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-title">关于博客</h3>
+            <p>这是一个分享技术、生活和思考的个人博客空间，欢迎交流与分享。</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">快速链接</h3>
+            <div class="footer-links-container">
+                <ul class="footer-links">
+                    <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                    <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                    <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                </ul>
+                <ul class="footer-links">
+                    <li><a href="/api/about"><i class="fas fa-user"></i> 关于我</a></li>
+                    <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系我</a></li>
+                    <li><a href="/api/privacy"><i class="fas fa-shield-alt"></i> 隐私政策</a></li>
+                    <li><a href="/api/usage"><i class="fas fa-file-contract"></i> 使用条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">联系方式</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-envelope"></i>qiqizizzz@qq.com</a></li>
+                <li><a href="https://github.com/qiqizizzz"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 我的博客. 保留所有权利.</p>
+    </div>
+</footer>
+</body>
+<!-- 添加必要的脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/HeaderAndFooter.js"></script>
+<script src="/js/privacy.js"></script>
+</html>

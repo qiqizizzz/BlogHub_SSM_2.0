@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<form id="login-form">
+    <div class="glass-wrapper">
+        <div class="login">
+            <p class="style1">登陆您的账户</p>
+            <div class="div1">
+                <label for="username" class="style2">UserName</label>
+                <input type="text" name="username" id="username" autocomplete="text" class="login-input" required>
+            </div>
+            <div class="div1">
+                <label for="password" class="style2">PassWord</label>
+                <input type="password" name="password" id="password" autocomplete="current-password" class="login-input" required>
+            </div>
+            <button id="login-btn">Sign In</button>
+            <p class="style3">还没有帐户? <a href="/register" class="register">注册</a></p>
+        </div>
+    </div>
+</form>
+<script>
+    document.getElementById('login-btn').addEventListener('click', async function (e) {
+        e.preventDefault(); // 阻止默认表单提交行为
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // 向后端发送 POST 请求
+        const response = await fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+        });
+
+        const storedUserInfo = {
+            username: "exampleUser",
+            password: "password123"
+        };
+
+        if (response.ok) {
+            // 登录成功
+            alert("Login success!");
+            //存储信息到localStorage
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            window.location.href = 'api';
+        } else {
+            // 登录失败，显示错误信息
+            const errorMessage = await response.text();
+            alert(errorMessage);  // 弹窗显示登录失败的原因
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 - 我的个人博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <!-- 添加Markdown编辑器样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <!-- 添加评论系统样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css">
+    <!-- 添加自定义样式 -->
+    <link rel="stylesheet" href="/css/api.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+</head>
+<body>
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main class="article-container">
+    <div class="article-content">
+        <!-- 文章标题和元信息 -->
+        <div class="article-header">
+            <!-- 替换标题 -->
+            <h1 class="article-title" id="articleTitle"></h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i><span id="publishDate">2024-03-21</span></span>
+                <span><i class="far fa-user"></i> 作者: <span id="author">博主</span></span>
+                <span><i class="far fa-eye"></i> <span id="viewCount">1234</span> 阅读</span>
+                <span><i class="far fa-comment"></i> 23 评论</span>
+                <span><i class="far fa-heart"></i> 45 点赞</span>
+                <span><i class="far fa-bookmark"></i> 12 收藏</span>
+            </div>
+            <!-- 替换标签 -->
+            <div class="article-tags" id="articleTags"></div>
+        </div>
+
+        <!-- 文章内容 -->
+        <div class="article-body" id="markdownContainer">
+            <!-- 渲染结果会插入这里 -->
+        </div>
+
+
+        <!-- 文章操作按钮 -->
+        <div class="article-actions">
+            <button class="btn btn-primary" onclick="handleLike(this)"><i class="far fa-heart"></i> 点赞</button>
+            <button class="btn btn-success" onclick="handleFavorite(this)"><i class="far fa-bookmark"></i> 收藏</button>
+            <button class="btn btn-info" onclick="handleShare(this)"><i class="fas fa-share-alt"></i> 分享</button>
+        </div>
+
+        <!-- 评论区 -->
+        <div class="comments-section">
+            <h3 class="comments-title">评论区 (23)</h3>
+
+            <!-- 评论输入框 -->
+            <div class="comment-form">
+                <div class="user-avatar-small">
+                    <img src="/img/PepImg.png" alt="用户头像" id="commentUserAvatar">
+                </div>
+                <div class="comment-input-container">
+                    <textarea id="commentInput" placeholder="写下你的评论..." style="resize: none;"></textarea>
+                    <div class="comment-form-actions">
+                        <button class="btn btn-primary" onclick="submitComment()">发表评论</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 评论列表 -->
+            <div class="comments-list">
+                <!-- 评论项 1 -->
+                <div class="comment-item">
+                    <div class="comment-avatar">
+                        <img src="/img/PepImg.png" alt="用户头像">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">张三</span>
+                            <span class="comment-date">2024-03-21 10:30</span>
+                        </div>
+                        <div class="comment-text">
+                            <p>这篇文章说得很有道理，我也是学Unity的，确实感觉找工作比较困难。不过我觉得关键是要有自己的作品集，展示自己的技术能力。</p>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(this)"><i class="far fa-heart"></i> 12</button>
+                            <button class="comment-action" onclick="replyToComment(this)"><i class="far fa-comment"></i> 回复</button>
+                        </div>
+
+                        <!-- 回复列表 -->
+                        <div class="replies-list">
+                            <!-- 回复项 1 -->
+                            <div class="reply-item">
+                                <div class="comment-avatar">
+                                    <img src="/img/PepImg.png" alt="用户头像">
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-header">
+                                        <span class="comment-author">李四</span>
+                                        <span class="comment-date">2024-03-21 11:15</span>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>同意你的观点，作品集真的很重要。我建议可以参加一些游戏开发比赛，这样既能提升技能，又能增加曝光度。</p>
+                                    </div>
+                                    <div class="comment-actions">
+                                        <button class="comment-action" onclick="likeComment(this)"><i class="far fa-heart"></i> 5</button>
+                                        <button class="comment-action" onclick="replyToComment(this)"><i class="far fa-comment"></i> 回复</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 评论项 2 -->
+                <div class="comment-item">
+                    <div class="comment-avatar">
+                        <img src="/img/PepImg.png" alt="用户头像">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">王五</span>
+                            <span class="comment-date">2024-03-21 14:20</span>
+                        </div>
+                        <div class="comment-text">
+                            <p>我觉得除了技术能力，沟通能力也很重要。在面试中，能够清晰地表达自己的想法和项目经验，会给面试官留下好印象。</p>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(this)"><i class="far fa-heart"></i> 8</button>
+                            <button class="comment-action" onclick="replyToComment(this)"><i class="far fa-comment"></i> 回复</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <aside class="article-sidebar">
+        <!-- 作者信息 -->
+        <div class="sidebar-widget author-widget">
+            <h3 class="widget-title">作者信息</h3>
+            <div class="author-info">
+                <img src="/img/userImg.PNG" alt="作者头像" class="author-avatar">
+                <div class="author-details">
+                    <h4 class="author-name">博主</h4>
+                    <p class="author-bio">热爱技术，热爱分享。专注于Web开发和游戏开发领域。</p>
+                    <div class="author-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 相关文章 -->
+        <div class="sidebar-widget">
+            <h3 class="widget-title">相关文章</h3>
+            <ul class="related-posts">
+                <li>
+                    <a href="#">
+                        <div class="related-post">
+                            <img src="/img/airticle1.jpg" alt="相关文章配图">
+                            <div class="related-post-info">
+                                <h4>技术老大：什么？作为前端你连怎么展示docx文件都不会？</h4>
+                                <span class="related-post-date">2024-03-20</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="related-post">
+                            <img src="/img/airticle2.jpg" alt="相关文章配图">
+                            <div class="related-post-info">
+                                <h4>如何提升前端开发效率？这些工具你必须知道</h4>
+                                <span class="related-post-date">2024-03-19</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="related-post">
+                            <img src="/img/airticle3.jpg" alt="相关文章配图">
+                            <div class="related-post-info">
+                                <h4>2024年前端开发趋势分析</h4>
+                                <span class="related-post-date">2024-03-18</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 标签云 -->
+        <div class="sidebar-widget">
+            <h3 class="widget-title">标签云</h3>
+            <div class="tag-cloud">
+                <a href="#" class="tag-cloud-item">技术</a>
+                <a href="#" class="tag-cloud-item">前端</a>
+                <a href="#" class="tag-cloud-item">JavaScript</a>
+                <a href="#" class="tag-cloud-item">CSS</a>
+                <a href="#" class="tag-cloud-item">HTML</a>
+                <a href="#" class="tag-cloud-item">Vue</a>
+                <a href="#" class="tag-cloud-item">React</a>
+                <a href="#" class="tag-cloud-item">Unity</a>
+                <a href="#" class="tag-cloud-item">游戏开发</a>
+                <a href="#" class="tag-cloud-item">实习</a>
+            </div>
+        </div>
+    </aside>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-title">关于博客</h3>
+            <p>这是一个分享技术、生活和思考的个人博客空间，欢迎交流与分享。</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">快速链接</h3>
+            <div class="footer-links-container">
+                <ul class="footer-links">
+                    <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                    <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                    <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                </ul>
+                <ul class="footer-links">
+                    <li><a href="/api/about"><i class="fas fa-user"></i> 关于我</a></li>
+                    <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系我</a></li>
+                    <li><a href="/api/privacy"><i class="fas fa-shield-alt"></i> 隐私政策</a></li>
+                    <li><a href="/api/usage"><i class="fas fa-file-contract"></i> 使用条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">联系方式</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-envelope"></i>qiqizizzz@qq.com</a></li>
+                <li><a href="https://github.com/qiqizizzz"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 我的博客. 保留所有权利.</p>
+    </div>
+</footer>
+
+<!-- 添加必要的脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/articles.js"></script>
+<script th:inline="javascript">
+    /*[[
+        ${markdownContent}
+    ]]*/
+
+    const markdownText = /*[[${markdownContent}]]*/ '';
+    const title = /*[[${title}]]*/ '';
+    const category = /*[[${category}]]*/ '';
+    const tags = /*[[${tags}]]*/ '';
+    const viewCount = /*[[${viewCount}]]*/ 0;
+
+    // 将 markdown 转换为 HTML
+    const htmlContent = marked.parse(markdownText);
+
+    // 设置标题
+    document.getElementById('articleTitle').innerText = title;
+
+    // 设置阅读量
+    document.getElementById('viewCount').innerText = viewCount;
+
+    // 设置标签
+    const tagContainer = document.getElementById('articleTags');
+    if (tags) {
+        tags.split(',').forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.innerText = tag.trim();
+            tagContainer.appendChild(span);
+        });
+    }
+
+
+    // 渲染到页面
+    document.getElementById("markdownContainer").innerHTML = htmlContent;
+</script>
+
+</body>
+</html>

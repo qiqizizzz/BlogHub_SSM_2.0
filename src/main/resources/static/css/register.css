@@ -1,0 +1,167 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(135deg, #e0f2ff 0%, #f5f9ff 100%);
+}
+
+.form-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 119, 204, 0.1);
+    width: 100%;
+    max-width: 450px;
+    transition: all 0.3s ease;
+}
+
+.form-container:hover {
+    box-shadow: 0 15px 35px rgba(0, 119, 204, 0.15);
+}
+
+h2 {
+    color: #0077cc;
+    text-align: center;
+    margin-bottom: 1.8rem;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #cce0ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #f8fbff;
+    color: #333;
+}
+
+input:focus {
+    outline: none;
+    border-color: #66b3ff;
+    box-shadow: 0 0 0 3px rgba(102, 179, 255, 0.2);
+    background-color: white;
+}
+
+input::placeholder {
+    color: #aac;
+    opacity: 0.7;
+}
+
+button {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #0066b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 119, 204, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 1.8rem;
+        margin: 0 1rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* 更柔和的登录链接样式 */
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #6c757d; /* 更柔和的灰色 */
+    font-size: 0.95rem;
+}
+
+.form-footer a {
+    color: #5a8fcc; /* 更柔和的蓝色 */
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 6px;
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.2, 1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.form-footer a:hover {
+    color: #4a7cb3; /* 更深的柔和蓝色 */
+    background-color: rgba(90, 143, 204, 0.05); /* 更淡的背景色 */
+}
+
+/* 更柔和的下划线动画 */
+.form-footer a::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    bottom: 2px;
+    width: calc(100% - 16px);
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.7; /* 半透明效果 */
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.form-footer a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 1;
+}

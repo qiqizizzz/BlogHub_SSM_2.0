@@ -1,0 +1,95 @@
+/* 隐私政策页面美化 */
+
+.privacy-wrapper {
+    max-width: 960px;
+    margin: 120px auto 60px;
+    padding: 2rem 2.5rem;
+    background: #fbfbfb;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #333;
+    line-height: 1.8;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.privacy-header h1 {
+    font-size: 2.2rem;
+    color: #2d3e50;
+    margin-bottom: 0.5rem;
+}
+
+.privacy-header .subtitle {
+    font-size: 1rem;
+    color: #7b8c99;
+}
+
+.privacy-content h2 {
+    font-size: 1.4rem;
+    color: #2aa198;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    /* 移除左边的竖线 */
+    padding-left: 0;
+    border-left: none;
+    font-weight: 400;
+}
+
+.privacy-content p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 1rem;
+    text-indent: 2em;
+}
+
+.privacy-content ul {
+    margin-left: 2rem;
+    padding-left: 1rem;
+    list-style-type: disc;
+    color: #555;
+}
+
+.privacy-content li {
+    margin-bottom: 0.5rem;
+}
+
+.privacy-content a {
+    color: #1abc9c;
+    text-decoration: underline;
+}
+
+.privacy-content a:hover {
+    color: #16a085;
+}
+
+@media screen and (max-width: 768px) {
+    .privacy-wrapper {
+        padding: 1.5rem 1.2rem;
+        margin: 100px 1rem 40px;
+    }
+
+    .privacy-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .privacy-content h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* 重用淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

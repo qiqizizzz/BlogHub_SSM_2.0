@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人资料 - 我的博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/api.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+    <link rel="stylesheet" href="/css/viewProfile.css">
+</head>
+<body>
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main class="profile-container">
+    <div class="profile-header">
+        <div class="profile-cover"></div>
+        <div class="profile-info">
+            <div class="profile-avatar-container">
+                <img src="/img/userImg.PNG" alt="用户头像" class="profile-avatar">
+            </div>
+            <div class="profile-details">
+                <h1 class="profile-name" th:text="${username}">用户名</h1>
+                <p class="profile-bio">这个人很懒，什么都没写~</p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">42</span>
+                        <span class="stat-label">文章</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1,234</span>
+                        <span class="stat-label">粉丝</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">567</span>
+                        <span class="stat-label">关注</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-main">
+            <div class="profile-tabs">
+                <button class="tab-btn active">文章</button>
+                <button class="tab-btn">收藏</button>
+                <button class="tab-btn">评论</button>
+                <button class="tab-btn">点赞</button>
+            </div>
+
+            <div class="tab-content active">
+                <!-- 文章列表 -->
+                <article class="post-card">
+                    <img src="/img/airticle2.jpg" alt="文章配图">
+                    <div class="post-content">
+                        <h2 class="post-title">学了好久的Unity，为什么连个游戏实习都找不到 北京每天200的实习都找不到?</h2>
+                        <div class="post-meta">
+                            <span><i class="far fa-calendar"></i> 2024-03-21</span>
+                            <span><i class="far fa-eye"></i> 1234</span>
+                            <span><i class="far fa-comment"></i> 23</span>
+                            <span><i class="far fa-heart"></i> 45</span>
+                        </div>
+                        <p class="post-excerpt">胡说： 因为保安花1个月学unity,也比你做的这东西要好啊. 说得比较难听,但你别不服气,都不用整什么drawcall之类优化这种后期,即使让一个初中…</p>
+                        <div class="post-tags">
+                            <span class="tag">技术</span>
+                            <span class="tag">前端</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <img src="/img/airticle1.jpg" alt="文章配图">
+                    <div class="post-content">
+                        <h2 class="post-title">技术老大：什么？作为前端你连怎么展示docx文件都不会？</h2>
+                        <div class="post-meta">
+                            <span><i class="far fa-calendar"></i> 2024-03-20</span>
+                            <span><i class="far fa-eye"></i> 856</span>
+                            <span><i class="far fa-comment"></i> 12</span>
+                            <span><i class="far fa-heart"></i> 34</span>
+                        </div>
+                        <p class="post-excerpt">程序员小叶： 那天听到隔壁组的技术领导在怒斥刚来的前端小白 我让你显示个docx的文件而已，你搞这么久还没搞出来？ 你是怎么被招进来的？ 前端小白默默地啥也…</p>
+                        <div class="post-tags">
+                            <span class="tag">生活</span>
+                            <span class="tag">随笔</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="profile-card">
+                <h3 class="card-title">个人信息</h3>
+                <ul class="info-list">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>邮箱: qiqizizzz@qq.com</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>注册时间: 2023-01-01</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>所在地: 江西南昌</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-link"></i>
+                        <span>个人网站: 未设置</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="profile-card">
+                <h3 class="card-title">社交链接</h3>
+                <div class="social-links">
+                    <a href="https://github.com/qiqizizzz" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/qiqizizzz" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/qiqizizzz" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="https://github.com/qiqizizzz" class="social-link"><i class="fab fa-zhihu"></i></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-title">关于博客</h3>
+            <p>这是一个分享技术、生活和思考的个人博客空间，欢迎交流与分享。</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">快速链接</h3>
+            <div class="footer-links-container">
+                <ul class="footer-links">
+                    <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                    <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                    <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                </ul>
+                <ul class="footer-links">
+                    <li><a href="/api/about"><i class="fas fa-user"></i> 关于我</a></li>
+                    <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系我</a></li>
+                    <li><a href="/api/privacy"><i class="fas fa-shield-alt"></i> 隐私政策</a></li>
+                    <li><a href="/api/usage"><i class="fas fa-file-contract"></i> 使用条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">联系方式</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-envelope"></i>qiqizizzz@qq.com</a></li>
+                <li><a href="https://github.com/qiqizizzz"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 我的博客. 保留所有权利.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/HeaderAndFooter.js"></script>
+</body>
+</html>

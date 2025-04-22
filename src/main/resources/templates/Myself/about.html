@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于作者</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+</head>
+<body>
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main class="about-container">
+    <div class="about-content">
+        <div class="author-profile">
+            <img src="/img/userImg.PNG" alt="作者头像" class="author-avatar">
+            <h1 class="author-name">博主</h1>
+            <p class="author-title">全栈开发者 & 技术博主</p>
+            <div class="social-links">
+                <a href="https://github.com/qiqizizzz" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                <a href="https://mail.qq.com/cgi-bin/frame_html?sid=I_lk2Iwe1HOF-nIV&r=9cd56fe13a57c5726ce06785394754ee&lang=zh" class="social-link"><i class="fab fa-qq"></i></a>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <p>我是一名热爱技术的全栈开发者，专注于Web开发和游戏开发。在这个博客中，我分享我的技术见解、学习心得和项目经验。</p>
+            <p>我坚信技术应该服务于人，通过代码创造价值。在技术之外，我也热衷于分享生活感悟和读书心得。</p>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fas fa-code"></i> 技术栈</h2>
+            <div class="skills">
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Spring Boot</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">Vue.js</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Unity</span>
+                <span class="skill-tag">C#</span>
+                <span class="skill-tag">Git</span>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+            <div class="education-item">
+                <h3>计算机科学与技术 学士</h3>
+                <p class="education-time">2023 - 至今</p>
+                <p class="education-school">某不知名大学</p>
+                <p class="education-desc">主修游戏开发和Web开发方向，做过多个项目。</p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fas fa-briefcase"></i> 项目经历</h2>
+            <div class="experience-item">
+                <h3>企业考勤系统</h3>
+                <p class="experience-time">2024.12.23 - 2025.1.2</p>
+                <p class="experience-company">使用技术：SSM框架、HTML、CSS、JavaScript</p>
+                <p class="experience-desc">实现基本的增删改查功能，实现前后端连接与数据库连接</p>
+            </div>
+            <div class="experience-item">
+                <h3>Console游戏项目</h3>
+                <p class="experience-time">2025.2.27 - 2025.3.21</p>
+                <p class="experience-company">使用技术：C#反射、类、数据结构</p>
+                <p class="experience-desc">完成了贪吃蛇等游戏并实现GUI功能</p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fas fa-heart"></i> 兴趣爱好</h2>
+            <div class="hobbies">
+                <div class="hobby-item">
+                    <i class="fas fa-book"></i>
+                    <h3>阅读</h3>
+                    <p>喜欢阅读技术书籍和文学经典</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-music"></i>
+                    <h3>音乐</h3>
+                    <p>热爱古典音乐和轻音乐</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-camera"></i>
+                    <h3>摄影</h3>
+                    <p>用镜头记录生活的美好瞬间</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-title">关于博客</h3>
+            <p>这是一个分享技术、生活和思考的个人博客空间，欢迎交流与分享。</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">快速链接</h3>
+            <div class="footer-links-container">
+                <ul class="footer-links">
+                    <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                    <li><a href="/api/categories"><i class="fas fa-folder"></i> 分类</a></li>
+                    <li><a href="/api/tags"><i class="fas fa-tags"></i> 标签</a></li>
+                </ul>
+                <ul class="footer-links">
+                    <li><a href="/api/about"><i class="fas fa-user"></i> 关于我</a></li>
+                    <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系我</a></li>
+                    <li><a href="/api/privacy"><i class="fas fa-shield-alt"></i> 隐私政策</a></li>
+                    <li><a href="/api/usage"><i class="fas fa-file-contract"></i> 使用条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">联系方式</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-envelope"></i> qiqizizzz@qq.com</a></li>
+                <li><a href="https://github.com/qiqizizzz"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 我的博客. 保留所有权利.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/about.js"></script>
+</body>
+</html>

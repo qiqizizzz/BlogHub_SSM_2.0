@@ -1,0 +1,163 @@
+/* 控制台文章表格整体布局 */
+.main-content {
+    max-width: 1200px;  /* 增大最大宽度 */
+    margin: 100px auto 50px;
+    padding: 30px 40px;
+    background-color: rgb(255, 255, 255);  /* 更柔和的淡蓝色背景 */
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+}
+
+/* 标题居中 */
+.console-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.console-title .section-title {
+    font-size: 24px;  /* 增大字体 */
+    font-weight: 700;  /* 加粗字体 */
+    color: #01579b;  /* 深蓝色标题 */
+}
+
+/* 表格整体优化 */
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 800px;  /* 保证最小宽度 */
+}
+
+/* 表头样式 */
+.article-table thead {
+    background-color: #e3f2fd;  /* 更温和的蓝色背景 */
+}
+
+.article-table th {
+    padding: 20px 24px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;  /* 加粗字体 */
+    color: #01579b;  /* 表头字体颜色改为深蓝色 */
+}
+
+/* 表格内容优化 */
+.article-table td {
+    padding: 18px 24px;
+    font-size: 17px;  /* 增大字体 */
+    color: #333;  /* 使表格内容字体颜色为深灰色 */
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease;
+}
+
+/* 条纹效果优化 */
+.article-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;  /* 更柔和的灰白色背景 */
+}
+
+/* 悬停效果增强 */
+.article-table tbody tr:hover {
+    background-color: rgba(225, 245, 254, 0.49);  /* 悬停时颜色变为柔和的蓝色 */
+    cursor: pointer;
+}
+
+/* 操作按钮容器 */
+.article-table td:last-child {
+    display: flex;
+    gap: 12px;
+}
+
+/* 按钮样式重做 */
+.delete-btn {
+    padding: 8px 16px;
+    background: #fbe9e7;
+    color: #d32f2f;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;  /* 加粗字体 */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.delete-btn:hover {
+    background: #ffccbc;
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+}
+
+/* 新增编辑按钮 */
+.edit-btn {
+    padding: 8px 16px;
+    background: #e3f2fd;
+    color: #1976d2;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;  /* 加粗字体 */
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #bbdefb;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+}
+
+/* 分页样式优化 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 20px;
+    gap: 12px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #4a5568;
+    font-size: 16px;  /* 增大字体 */
+    font-weight: 600;  /* 加粗字体 */
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #f1f8ff;  /* 更柔和的蓝色背景 */
+    border-color: #cfd8dc;
+    color: #1976d2;  /* 按钮字体颜色变为蓝色 */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.pagination button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 16px;
+    color: #333;
+    margin: 0 15px;
+}
+
+/* 响应式处理 */
+@media (max-width: 1200px) {
+    .main-content {
+        margin: 80px 20px 40px;
+        padding: 20px;
+    }
+
+    .article-table {
+        overflow-x: auto;
+        display: block;
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑个人资料</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/api.css">
+    <link rel="stylesheet" href="/css/editProfile.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+</head>
+<body>
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="/api"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="/api#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="/api#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main class="edit-profile-container">
+    <div class="profile-card">
+        <div class="card-header">
+            <h1 class="profile-title">编辑个人资料</h1>
+            <p class="profile-subtitle">更新您的个人信息和账户设置</p>
+        </div>
+
+        <div class="profile-content">
+            <div class="avatar-section">
+                <div class="avatar-wrapper">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="current-avatar">
+                    <div class="avatar-overlay">
+                        <label for="avatar-input" class="upload-btn">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <p class="avatar-tip">点击图标更换头像</p>
+            </div>
+
+            <form class="profile-form" id="profileForm">
+                <div class="form-section">
+                    <h2 class="section-title">基本信息</h2>
+                    <div class="form-group">
+                        <label for="email">邮箱地址</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">修改密码</h2>
+                    <div class="form-group">
+                        <label for="currentPassword">当前密码</label>
+                        <input type="password" id="currentPassword" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">新密码</label>
+                        <input type="password" id="newPassword" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">确认新密码</label>
+                        <input type="password" id="confirmPassword" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> 保存更改
+                    </button>
+                    <a href="/api" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> 取消
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="/js/HeaderAndFooter.js"></script>
+<script>
+    //更新资料表单提交
+    const profileForm = document.querySelector('#profileForm');
+    profileForm.addEventListener('submit',async function(e) {
+        e.preventDefault();
+        const email = document.querySelector('#email').value;
+        const currentPassword = document.querySelector('#currentPassword').value;
+        const newPassword = document.querySelector('#newPassword').value;
+        const confirmPassword = document.querySelector('#confirmPassword').value;
+        //获取名字
+        const username = document.querySelector('#navUserName').textContent;
+        //const username = localStorage.getItem("username");
+
+        try{
+            const response = await fetch('/people/editProfile', {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                body: `email=${email}&oldPassword=${currentPassword}&newPassword=${newPassword}&confirmPassword=${confirmPassword}&username=${username}`
+            });
+            if(response.ok){
+                alert('资料更新成功！');
+                location.href = '/api';
+            }else{
+                const error=await response.text();
+                alert(error);
+            }
+
+        }catch(error){
+            alert('发生错误，请稍后再试！');
+        }
+
+
+    });
+</script>
+</body>
+</html>

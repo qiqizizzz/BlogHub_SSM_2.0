@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <!-- 添加Markdown编辑器样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <!-- 添加评论系统样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css">
+    <!-- 添加自定义样式 -->
+    <link rel="stylesheet" href="/css/api.css">
+    <link rel="stylesheet" href="/css/HeaderAndFooter.css">
+</head>
+<body>
+<header class="header" >
+    <nav class="nav-container" >
+        <div class="logo">我的博客</div>
+        <ul class="nav-links">
+            <div class="main-nav">
+                <li><a href="#"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                <li><a href="#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                <li><a href="#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                <li><a href="/api/about"><i class="fas fa-user"></i> 关于</a></li>
+                <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系</a></li>
+            </div>
+            <div class="auth-nav">
+                <li><a href="/login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+                <li><a href="/register" id="registerBtn"><i class="fas fa-user-plus"></i> 注册</a></li>
+                <li class="user-menu" style="display: none;">
+                    <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="navUserAvatar">
+                    <div class="user-info">
+                        <span class="user-name" id="navUserName" th:text="${username}">[username]</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="/people/viewProfile"><i class="fas fa-user-circle"></i> 个人主页</a>
+                        <a href="/people/consoleDash"><i class="fas fa-tachometer-alt"></i> 控制台</a>
+                        <a href="/people/myPosts"><i class="fas fa-file-alt"></i> 我的文章</a>
+                        <div class="divider"></div>
+                        <a href="/people/editProfile"><i class="fas fa-user-edit"></i> 编辑资料</a>
+                        <a href="/login" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="main-content" id="home">
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索文章...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 文章列表容器 -->
+        <div id="articleList">
+            <!-- 文章将通过JavaScript动态插入 -->
+        </div>
+
+        <!-- 分页控件 -->
+        <div class="pagination">
+            <button class="page-btn" id="prevPage" disabled>
+                <i class="fas fa-chevron-left"></i> 上一页
+            </button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button class="page-btn" id="nextPage">
+                下一页 <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <!-- 用户信息 (登录后显示) -->
+        <div class="sidebar-widget user-profile-widget" style="display: none;">
+            <h3 class="widget-title">个人信息</h3>
+            <div class="user-profile">
+                <img src="/img/userImg.PNG" alt="用户头像" class="user-avatar" id="userAvatar">
+                <div class="user-info">
+                    <div class="user-name" id="userDisplayName">用户名</div>
+                    <div class="user-bio" id="userBio">个人简介</div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <a href="/people/editProfile" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> 编辑资料
+                </a>
+            </div>
+        </div>
+
+        <!-- 站点信息 -->
+        <div class="sidebar-widget">
+            <h3 class="widget-title">站点信息</h3>
+            <div class="site-info">
+                <div class="site-info-item">
+                    <div class="site-info-number">42</div>
+                    <div>文章总数</div>
+                </div>
+                <div class="site-info-item">
+                    <div class="site-info-number">1,234</div>
+                    <div>总访问量</div>
+                </div>
+                <div class="site-info-item">
+                    <div class="site-info-number">56</div>
+                    <div>评论总数</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分类 -->
+        <div class="sidebar-widget" id="categories">
+            <h3 class="widget-title">分类</h3>
+            <ul class="category-list">
+                <li><a href="#">技术 <span>(15)</span></a></li>
+                <li><a href="#">生活 <span>(10)</span></a></li>
+                <li><a href="#">随笔 <span>(8)</span></a></li>
+                <li><a href="#">教程 <span>(9)</span></a></li>
+            </ul>
+        </div>
+
+        <!-- 标签云 -->
+        <div class="sidebar-widget" id="tags">
+            <h3 class="widget-title">标签云</h3>
+            <ul class="tag-cloud">
+                <li><a href="#">JavaScript <span>(12)</span></a></li>
+                <li><a href="#">CSS <span>(8)</span></a></li>
+                <li><a href="#">HTML <span>(6)</span></a></li>
+                <li><a href="#">Vue <span>(5)</span></a></li>
+                <li><a href="#">React <span>(4)</span></a></li>
+            </ul>
+        </div>
+
+        <!-- 友情链接 -->
+        <div class="sidebar-widget">
+            <h3 class="widget-title">友情链接</h3>
+            <div class="friend-links">
+                <a href="https://github.com/qiqizizzz" class="friend-link">Github</a>
+                <a href="https://blog.csdn.net/2303_80373297?spm=1000.2115.3001.5343" class="friend-link">CSDN博客</a>
+                <a href="https://www.zhihu.com/people/loser--85-94" class="friend-link">知乎</a>
+                <a href="https://space.bilibili.com/5426392?spm_id_from=333.1007.0.0" class="friend-link">哔哩哔哩</a>
+            </div>
+        </div>
+    </aside>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-title">关于博客</h3>
+            <p>这是一个分享技术、生活和思考的个人博客空间，欢迎交流与分享。</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">快速链接</h3>
+            <div class="footer-links-container">
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/api/writeArticles"><i class="fas fa-book"></i> 发布</a></li>
+                    <li><a href="#categories"><i class="fas fa-folder"></i> 分类</a></li>
+                    <li><a href="#tags"><i class="fas fa-tags"></i> 标签</a></li>
+                </ul>
+                <ul class="footer-links">
+                    <li><a href="/api/about"><i class="fas fa-user"></i> 关于我</a></li>
+                    <li><a href="/api/contact"><i class="fas fa-envelope"></i> 联系我</a></li>
+                    <li><a href="/api/privacy"><i class="fas fa-shield-alt"></i> 隐私政策</a></li>
+                    <li><a href="/api/usage"><i class="fas fa-file-contract"></i> 使用条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">联系方式</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-envelope"></i>qiqizizzz@qq.com</a></li>
+                <li><a href="https://github.com/qiqizizzz"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 我的博客. 保留所有权利.</p>
+    </div>
+</footer>
+
+<!-- 文章编辑器模态框 -->
+<div class="modal" id="editorModal" style="display: none;">
+    <div class="modal-content">
+        <h2>发布文章</h2>
+        <form id="postForm">
+            <div class="form-group">
+                <label for="postTitle">标题</label>
+                <input type="text" id="postTitle" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="postCategory">分类</label>
+                <select id="postCategory" class="form-control" required>
+                    <option value="">选择分类</option>
+                    <option value="技术">技术</option>
+                    <option value="生活">生活</option>
+                    <option value="随笔">随笔</option>
+                    <option value="教程">教程</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="postTags">标签 (用逗号分隔)</label>
+                <input type="text" id="postTags" class="form-control" placeholder="例如: JavaScript, CSS, HTML">
+            </div>
+            <div class="form-group">
+                <label for="postContent">内容</label>
+                <div class="editor-container">
+                    <textarea id="postContent"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="postTop"> 置顶文章
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">发布</button>
+        </form>
+    </div>
+</div>
+
+<!-- 添加必要的脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/HeaderAndFooter.js"></script>
+</body>
+</html>
