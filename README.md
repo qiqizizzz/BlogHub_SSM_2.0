@@ -8,4 +8,4 @@
 
 ![delete](/img/delete.png)
 
-![mkd]/img/mkd.png)
+![mkd](/img/mkd.png)
